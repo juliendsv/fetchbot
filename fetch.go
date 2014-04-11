@@ -239,12 +239,12 @@ loop:
 			// Start a new channel and goroutine for this host.
 
 			// Must send the robots.txt request.
-			rob, err := u.Parse("/robots.txt")
-			if err != nil {
-				// Handle on a separate goroutine, the Queue goroutine must not block.
-				go f.Handler.Handle(&Context{Cmd: v, Q: f.q}, nil, err)
-				continue
-			}
+			//rob, err := u.Parse("/robots.txt")
+			//if err != nil {
+			// Handle on a separate goroutine, the Queue goroutine must not block.
+			//go f.Handler.Handle(&Context{Cmd: v, Q: f.q}, nil, nil, err)
+			//continue
+			//}
 			// Create the infinite queue: the in channel to send on, and the out channel
 			// to read from in the host's goroutine, and add to the hosts map
 			var out chan Command
@@ -256,7 +256,7 @@ loop:
 			// Start the working goroutine for this host
 			go f.processChan(out)
 			// Enqueue the robots.txt request first.
-			in <- robotCommand{&Cmd{U: rob, M: "GET"}}
+			//in <- robotCommand{&Cmd{U: rob, M: "GET"}}
 		}
 		// Send the request
 		in <- v

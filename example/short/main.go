@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/PuerkitoBio/fetchbot"
+	"github.com/juliendsv/fetchbot"
 )
 
 func main() {
 	f := fetchbot.New(fetchbot.HandlerFunc(handler))
 	queue := f.Start()
-	queue.SendStringHead("http://google.com", "http://golang.org", "http://golang.org/doc")
+	queue.SendStringGet("http://www.google.com")
 	queue.Close()
 }
 
